@@ -1,0 +1,360 @@
+/* RESET */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html, body{
+    height:100%;
+    overflow:hidden;
+    font-family:Arial, sans-serif;
+}
+
+/* BODY */
+body{
+    background:#f4f6f9;
+}
+
+/* APP WRAPPER */
+#app{
+    position:relative;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+}
+
+/*=========header=========*/
+.header{
+    text-align:center;
+    margin-bottom:25px;
+
+    /* background image */
+    background-image: url("../uploads/sem.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    padding:30px 15px;
+    border-radius:15px;
+    color:#fff;
+    position:relative;
+    overflow:hidden;
+}
+
+/* biar teks tetap jelas */
+.header::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.4);
+}
+
+/* teks di atas overlay */
+.header h2,
+.header p{
+    position:relative;
+    z-index:1;
+}
+
+/* =========================
+   PAGE SLIDE SYSTEM (FIXED)
+========================= */
+.page{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+
+    background:#f4f6f9;
+
+    transform:translateX(100%); /* start dari kanan */
+    transition:transform 0.35s ease;
+
+    overflow-y:auto;
+}
+
+/* ACTIVE PAGE */
+.page.active{
+    transform:translateX(0);
+}
+
+/* =========================
+   HEADER (TETAP)
+========================= */
+.header{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.header h2{
+    color:#222;
+    margin-bottom:8px;
+    font-size:28px;
+}
+
+.header p{
+    color:#fae6e6;
+    font-size:15px;
+}
+
+.header{
+    text-align:center;
+    margin-bottom:25px;
+
+    height:220px;
+    border-radius:20px;
+    overflow:hidden;
+    position:relative;
+
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    color:white;
+
+    transition:background-image 0.8s ease-in-out;
+}
+
+/* Overlay gelap */
+.header::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,.35);
+}
+
+.header h2,
+.header p{
+    position:relative;
+    z-index:2;
+}
+
+/* =========================
+   CARD (TETAP STYLE KAMU)
+========================= */
+.card{
+    width:100%;
+    max-width:900px;
+    background:#fff;
+    padding:25px;
+    border-radius:20px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.08);
+    margin-bottom:20px;
+}
+
+.card h3{
+    text-align:center;
+    margin-bottom:25px;
+    color:#333;
+    font-size:24px;
+}
+
+/* =========================
+   SERVICE (TIDAK DIUBAH STYLE)
+========================= */
+.service{
+    display:flex;
+    align-items:center;
+    gap:20px;
+    padding:15px;
+    margin-bottom:20px;
+    border-radius:15px;
+    background:#fafafa;
+    border:1px solid #eee;
+    transition:0.3s;
+}
+
+.service:hover{
+    transform:translateY(-2px);
+    box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* ZIGZAG DESKTOP */
+.service:nth-child(even){
+    flex-direction:row-reverse;
+}
+
+/* IMAGE */
+.service-img{
+    width:220px;
+    height:140px;
+    object-fit:cover;
+    border-radius:12px;
+}
+
+/* INFO */
+.service-info{
+    flex:1;
+}
+
+.service-info h4{
+    font-size:22px;
+    color:#222;
+    margin-bottom:8px;
+}
+
+.service-info p{
+    font-size:18px;
+    color:#28a745;
+    font-weight:bold;
+}
+
+/* BUTTON */
+.btn{
+    background:#28a745;
+    color:#fff;
+    border:none;
+    padding:12px 22px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:15px;
+    font-weight:bold;
+}
+
+.btn:hover{
+    background:#218838;
+}
+
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
+@media (max-width:768px){
+
+    .service{
+        gap:12px;
+        padding:12px;
+    }
+
+    .service-img{
+        width:150px;
+        height:100px;
+    }
+
+    .service-info h4{
+        font-size:16px;
+    }
+
+    .service-info p{
+        font-size:14px;
+    }
+
+    .btn{
+        padding:10px 14px;
+        font-size:14px;
+    }
+
+    /* tetap zigzag di HP */
+    .service:nth-child(odd){
+        flex-direction:row;
+    }
+
+    .service:nth-child(even){
+        flex-direction:row-reverse;
+    }
+}
+
+/* TABLET */
+@media (min-width:769px) and (max-width:1024px){
+
+    .card{
+        max-width:850px;
+    }
+
+    .service-img{
+        width:180px;
+        height:120px;
+    }
+}
+
+/* =========================
+   BOTTOM NAV (TETAP)
+========================= */
+.bottom-nav{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    height:65px;
+
+    background:#fff;
+    border-top:1px solid #ddd;
+
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+
+    box-shadow:0 -2px 10px rgba(0,0,0,0.08);
+    z-index:1000;
+}
+
+.nav-item{
+    flex:1;
+    text-decoration:none;
+    color:#777;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    font-size:13px;
+}
+
+.nav-item.active{
+    color:#28a745;
+    font-weight:bold;
+}
+
+
+.layanan-header{
+    text-align:center;
+}
+
+.about-text{
+    color:#555;
+    line-height:1.8;
+    margin-bottom:15px;
+    text-align:justify;
+}
+
+.fitur{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+}
+
+.fitur-item{
+    background:#f8f9fa;
+    padding:15px;
+    border-radius:12px;
+    text-align:center;
+    border:1px solid #eee;
+}
+
+.fitur-item i{
+    font-size:28px;
+    color:#28a745;
+    margin-bottom:10px;
+    display:block;
+}
+
+.fitur-item span{
+    font-size:14px;
+    font-weight:600;
+}
+
+@media(max-width:768px){
+
+    .fitur{
+        grid-template-columns:1fr;
+    }
+
+}

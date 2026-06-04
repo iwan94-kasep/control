@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Customer Dashboard</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<link rel="stylesheet" href="css/users.css">
+</head>
+
+<body>
+
+<div id="app">
+
+<!-- ================= HOME ================= -->
+<div id="homePage" class="page active">
+
+ <div class="header">
+    <h2></h2>
+    <p id="userInfo"></p>
+  </div>
+
+  <h3>layanan yang di sediakan</h3>
+
+  <div class="card">
+
+    <div class="service">
+      <img src="uploads/reflexsi.jpg" class="service-img">
+      <small class="img-caption">Membantu mengurangi stres dan membuat tubuh lebih rileks.</small>
+      <div class="service-info">
+        <h4>Pijat Relaksasi</h4>
+        <p>Rp 50.000</p>
+      </div>
+      <button class="btn" onclick="pesan('Pijat Relaksasi',50000)">Pesan</button>
+    </div>
+
+    <div class="service">
+      <img src="uploads/massage.png" class="service-img">
+      <small class="img-caption">Membantu mengurangi stres dan membuat tubuh lebih rileks.</small>
+      <div class="service-info">
+        <h4>Pijat Kesehatan</h4>
+        <p>Rp 75.000</p>
+      </div>
+      <button class="btn" onclick="pesan('Pijat Kesehatan',75000)">Pesan</button>
+    </div>
+
+    <div class="service">
+      <img src="uploads/reflexsi.jpg" class="service-img">
+      <small class="img-caption">Membantu mengurangi stres dan membuat tubuh lebih rileks.</small>
+      <div class="service-info">
+        <h4>body massage</h4>
+        <p>Rp 100.000</p>
+      </div>
+      <button class="btn" onclick="pesan('body massage',100000)">Pesan</button>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ================= PESANAN ================= -->
+<div id="pesananPage" class="page">
+
+  <div class="card">
+    <h3>Status Order</h3>
+
+    <div class="status" id="status">Belum ada order</div>
+    <div class="loading" id="loading">Mengirim order...</div>
+  </div>
+
+  <div class="card">
+    <h3>Informasi Mitra</h3>
+    <div id="mitraInfo">Belum ada mitra</div>
+  </div>
+
+</div>
+
+</div>
+
+<div id="layananPage" class="page">
+
+    <div class="header layanan-header">
+        <h2>Layanan Kami</h2>
+        <p>Massage, Refleksi & Spa Panggilan</p>
+    </div>
+
+    <div class="card">
+
+        <h3>Tentang PijatHub</h3>
+
+        <p class="about-text">
+            PijatHub adalah penyedia <b>layanan jasa massage, pijat, refleksi,
+            dan spa panggilan</b> yang siap datang ke lokasi yang Anda inginkan.
+            Kami melayani area <b>Kota Bandung & Cimahi</b> untuk kenyamanan Anda.
+        </p>
+
+        <p class="about-text">
+            Dengan tim terapis yang <b>profesional dan bersertifikasi</b>,
+            kami berkomitmen memberikan pelayanan terbaik untuk membantu
+            menjaga kesehatan, relaksasi, dan kebugaran tubuh Anda.
+        </p>
+
+        <p class="about-text">
+            Bersama <b>PijatHub</b>, mari berinvestasi dalam kesehatan Anda.
+            Rasakan relaksasi dan kebugaran optimal di tangan ahli kami.
+        </p>
+
+    </div>
+
+    <div class="card">
+
+        <h3>Keunggulan Kami</h3>
+
+        <div class="fitur">
+            <div class="fitur-item">
+                <i class="fa-solid fa-house"></i>
+                <span>Datang ke Lokasi Anda</span>
+            </div>
+
+            <div class="fitur-item">
+                <i class="fa-solid fa-user-check"></i>
+                <span>Terapis Profesional</span>
+            </div>
+
+            <div class="fitur-item">
+                <i class="fa-solid fa-certificate"></i>
+                <span>Bersertifikasi</span>
+            </div>
+
+            <div class="fitur-item">
+                <i class="fa-solid fa-heart"></i>
+                <span>Layanan Berkualitas</span>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ================= NAVBAR ================= -->
+<nav class="bottom-nav">
+
+  <a href="#" class="nav-item active"
+     onclick="bukaHalaman(event,'homePage',this)">
+    <i class="fa-solid fa-spa"></i>
+    <small>layanan</small>
+  </a>
+
+  <a href="#" class="nav-item"
+     onclick="bukaHalaman(event,'pesananPage',this)">
+    <i class="fa-solid fa-receipt"></i>
+    <small>Pesanan</small>
+  </a>
+
+  <a href="#" class="nav-item"
+     onclick="bukaHalaman(event,'layananPage',this)">
+    <i class="fa-solid fa-house"></i>
+    <small>tentang kami</small>
+  </a>
+
+</nav>
+
+<button class="btn logout" onclick="logout()">
+  Logout
+</button>
+
+<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+
+<script>
+function bukaHalaman(event,id,menu){
+
+    event.preventDefault();
+
+    document.querySelectorAll('.page')
+        .forEach(p => p.classList.remove('active'));
+
+    const target = document.getElementById(id);
+
+    if(!target){
+        console.log("Page tidak ditemukan:",id);
+        return;
+    }
+
+    target.classList.add('active');
+
+    document.querySelectorAll('.nav-item')
+        .forEach(i => i.classList.remove('active'));
+
+    menu.classList.add('active');
+}
+</script>
+
+</body>
+</html>
+
+<script>
+const header = document.querySelector('.header');
+
+const images = [
+    'uploads/iwan.jpeg',
+    'uploads/massage.png',
+    'uploads/reflexsi.jpg',
+    'uploads/sem.png'
+];
+
+let current = 0;
+
+function changeHeaderBg(){
+    header.style.backgroundImage =
+        `url('${images[current]}')`;
+
+    current++;
+
+    if(current >= images.length){
+        current = 0;
+    }
+}
+
+/* gambar pertama */
+changeHeaderBg();
+
+/* ganti tiap 4 detik */
+setInterval(changeHeaderBg, 4000);
+</script>
+
+
+
+<script>
+
+const API =
+"https://nodejs-production-fea7.up.railway.app";
+
+const socket = io(API);
+
+socket.on("order-updated", () => {
+
+  console.log("ORDER UPDATED");
+
+  ambilStatusOrder();
+
+});
+
+const user =
+JSON.parse(localStorage.getItem("user"));
+
+if(!user){
+
+  alert("Silakan login dulu");
+
+  window.location.href = "login.html";
+
+}
+
+document.getElementById("userInfo").innerHTML =
+"Halo, " + user.nama;
+
+ambilStatusOrder();
+
+async function ambilStatusOrder(){
+
+  try{
+
+    const res = await fetch(
+      API + "/status-order/" + user.id
+    );
+
+    const data = await res.json();
+
+    if(data.success){
+
+      const order = data.order;
+
+      // ================= STATUS =================
+      let statusText = "";
+      let tombolBatal = "";
+console.log("JS HIDUP");
+      if(order.status === "pending"){
+        statusText = "🟡 Menunggu Mitra";
+        tombolBatal = `
+  <button
+    class="btn-batal-user"
+    onclick="cancelOrderUser(${order.id})">
+    Batalkan
+  </button>
+`;
+        
+      }
+      
+      else if(order.status === "diambil"){
+  statusText = "🟢 Mitra Sedang Bersiap";
+
+  tombolBatal = `
+  <button
+    class="btn-batal-user"
+    onclick="cancelOrderUser(${order.id})">
+    Batalkan
+  </button>
+`;
+}
+
+
+else if(order.status === "menuju_lokasi") {
+  statusText = "🚗 Mitra sedang menuju lokasi";
+  
+ tombolBatal = `
+    <button onclick="cancelOrderUser(${order.id})">
+      Batalkan
+    </button>
+  `;
+}
+
+      else if(order.status === "dikerjakan"){
+        statusText = "💆 Sedang Dipijat";
+      }
+      else if(order.status === "selesai"){
+        statusText = "✅ Order Selesai";
+      }
+      else if(order.status === "canceled"){
+        statusText = "❌ Order Dibatalkan";
+      }
+
+      // ================= MITRA =================
+      let mitraHTML = "Belum ada mitra";
+       let aksiMitraHTML = "";
+      if(
+       order.driver_id &&
+       order.status !== "selesai" &&
+        order.status !== "canceled"
+        ){
+
+        try{
+
+          const res2 = await fetch(API + "/mitra/" + order.driver_id);
+          const dataMitra = await res2.json();
+
+          if(dataMitra.success){
+
+            const m = dataMitra.mitra;
+
+            mitraHTML = `
+              <div style="text-align:center">
+
+                <img src="${m.foto}" 
+                  style="
+                    width:80px;
+                    height:80px;
+                    border-radius:50%;
+                    object-fit:cover;
+                    border:2px solid #4f46e5;
+                    margin-bottom:10px;
+                  "
+                >
+
+                <br>
+
+                <b>Nama Mitra:</b><br>
+                ${m.nama}
+
+                <br><br>
+
+                <b>Telepon:</b><br>
+                ${m.telepon}
+
+                <br><a href="https://wa.me/62${m.telepon.replace(/^0/, '')}" 
+   target="_blank"
+   style="
+     display:inline-block;
+     margin-top:10px;
+     padding:10px 15px;
+     background:#25D366;
+     color:white;
+     border-radius:12px;
+     text-decoration:none;
+     font-weight:500;
+   ">
+   💬 Chat WhatsApp Mitra
+</a><br>
+
+                <b>Status:</b><br>
+                ${statusText}
+
+              </div>
+            `;
+
+          }
+
+        }catch(err){
+          console.log(err);
+        }
+
+      }
+
+      if(order.status === "diambil"){
+
+  aksiMitraHTML = `
+    <div style="margin-top:15px;">
+
+      <div style="
+        padding:10px;
+        background:#fff3cd;
+        color:#856404;
+        border-radius:10px;
+        margin-bottom:10px;
+        font-weight:500;
+      ">
+        🚗 Mitra sedang menuju lokasi Anda
+      </div>
+
+    </div>
+  `;
+
+}
+
+
+      // ================= TAMPIL STATUS =================
+      document.getElementById("status").innerHTML =
+`
+<b>Layanan:</b><br>
+${order.layanan}
+
+<br><br>
+
+<b>Status:</b><br>
+${statusText}
+
+<br><br>
+
+${tombolBatal}
+`;
+
+      // ================= TAMPIL MITRA =================
+      document.getElementById("mitraInfo").innerHTML = mitraHTML;
+
+    }
+
+  }catch(err){
+
+    console.log("SERVER ERROR:", err);
+
+  }
+
+}
+
+//===========tombol batal users=======
+
+window.cancelOrderUser = async function(id) {
+
+  const yes = confirm("Batalkan order ini?");
+  if (!yes) return;
+
+  try {
+
+    const res = await fetch(API + "/cancel-order-user", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ id })
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+
+      alert("Order dibatalkan");
+
+      ambilStatusOrder(); // refresh
+
+    } else {
+      alert("Gagal membatalkan order");
+    }
+
+  } catch (err) {
+    console.log(err);
+    alert("Server error");
+  }
+
+}
+
+
+async function pesan(layanan, harga) {
+
+  try {
+
+    document.getElementById("loading").style.display = "block";
+    document.getElementById("status").innerHTML = "Mengirim pesanan...";
+
+    let posisi = { latitude: "", longitude: "" };
+
+    try {
+      posisi = await getLokasi();
+    } catch (err) {
+      console.log("GPS tidak diizinkan");
+    }
+
+    const res = await fetch(API + "/pesan", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        user_id: user.id,
+        layanan,
+        harga,
+        latitude: posisi.latitude,
+        longitude: posisi.longitude
+      })
+    });
+
+    const data = await res.json();
+
+    document.getElementById("loading").style.display = "none";
+
+    if (data.success) {
+      document.getElementById("status").innerHTML = `
+        Pesanan berhasil dikirim <br><br>
+        Layanan: ${layanan}<br>
+        Harga: Rp ${harga.toLocaleString()}
+      `;
+    } else {
+      document.getElementById("status").innerHTML = "Pesanan gagal";
+    }
+
+  } catch (err) {
+
+    console.log(err);
+
+    document.getElementById("loading").style.display = "none";
+    document.getElementById("status").innerHTML = "Server error";
+  }
+
+}
+
+
+
+function logout(){
+
+  localStorage.removeItem("user");
+
+  window.location.href = "login.html";
+
+}
+
+function getLokasi(){
+
+  return new Promise((resolve,reject)=>{
+
+    navigator.geolocation.getCurrentPosition(
+
+      (pos)=>{
+
+        resolve({
+
+          latitude: pos.coords.latitude,
+          longitude: pos.coords.longitude
+
+        });
+
+      },
+
+      (err)=>{
+
+        reject(err);
+
+      }
+
+    );
+
+  });
+
+}
+
+</script>
+
+</body>
+</html>
