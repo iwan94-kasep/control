@@ -63,7 +63,7 @@
             <span>Pijat Relaksasi 120 Menit</span>
             <b>Rp150.000</b>
             <button class="btn"
-                onclick="pesan('Pijat Relaksasi 120 Menit',150000)">
+                onclick="pesan('Pijat Relaksasi 150 Menit',150000)">
                 Pesan
             </button>
         </div>
@@ -510,7 +510,7 @@ if(!user){
 
   alert("Silakan login dulu");
 
-  window.location.href = "loginuser.html";
+  window.location.href = "index.html";
 
 }
 
@@ -569,7 +569,7 @@ if(order.status === "pending"){
     if(!localStorage.getItem("diambil_" + order.id)){
 
         showModal(
-            "Mitra Ditemukan 🚗",
+            "Mitra Ditemukan",
             `
             <h3>Mitra telah mengambil pesanan Anda</h3>
             <p>Silakan lihat detail mitra di halaman pesanan.</p>
@@ -592,7 +592,7 @@ if(order.status === "pending"){
 
 
 else if(order.status === "menuju_lokasi") {
-  statusText = "🚗 Mitra sedang menuju lokasi";
+  statusText = "Mitra sedang menuju lokasi";
   
  tombolBatal = `
     <button onclick="cancelOrderUser(${order.id})">
@@ -695,7 +695,7 @@ else if(order.status === "menuju_lokasi") {
         margin-bottom:10px;
         font-weight:500;
       ">
-        🚗 Mitra sedang menuju lokasi Anda
+        Mitra sedang menuju lokasi Anda
       </div>
 
     </div>
