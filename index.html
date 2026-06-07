@@ -102,7 +102,7 @@ async function login() {
   if (data.success) {
     localStorage.setItem("user", JSON.stringify(data.user));
     alert("Login berhasil!");
-    window.location.href = "user.html";
+    window.location.href = "https://nodejs-production-fea7.up.railway.app/login/user.html";
   } else {
     alert(data.message);
   }

@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Customer Dashboard</title>
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
@@ -45,7 +46,7 @@
             <span>Pijat Relaksasi 60 Menit</span>
             <b>Rp100.000</b>
             <button class="btn"
-                onclick="pesan('Pijat Relaksasi 60 Menit',100000)">
+                onclick="showPesanForm('Pijat Relaksasi 60 Menit',100000)">
                 Pesan
             </button>
         </div>
@@ -54,7 +55,7 @@
             <span>Pijat Relaksasi 90 Menit</span>
             <b>Rp120.000</b>
             <button class="btn"
-                onclick="pesan('Pijat Relaksasi 90 Menit',120000)">
+                onclick="showPesanForm('Pijat Relaksasi 90 Menit',120000)">
                 Pesan
             </button>
         </div>
@@ -63,7 +64,7 @@
             <span>Pijat Relaksasi 120 Menit</span>
             <b>Rp150.000</b>
             <button class="btn"
-                onclick="pesan('Pijat Relaksasi 150 Menit',150000)">
+                onclick="showPesanForm('Pijat Relaksasi 120 Menit',150000)">
                 Pesan
             </button>
         </div>
@@ -88,7 +89,7 @@
             <span>Pijat Relaksasi 60 Menit</span>
             <b>Rp100.000</b>
             <button class="btn"
-                onclick="pesan('Pijat Relaksasi 60 Menit',100000)">
+                onclick="showPesanForm('Pijat Relaksasi 60 Menit',100000)">
                 Pesan
             </button>
         </div>
@@ -97,7 +98,7 @@
             <span>Pijat Relaksasi 90 Menit</span>
             <b>Rp120.000</b>
             <button class="btn"
-                onclick="pesan('Pijat Relaksasi 90 Menit',120000)">
+                onclick="showPesanForm('Pijat Relaksasi 90 Menit',120000)">
                 Pesan
             </button>
         </div>
@@ -106,7 +107,7 @@
             <span>Pijat Relaksasi 120 Menit</span>
             <b>Rp150.000</b>
             <button class="btn"
-                onclick="pesan('Pijat Relaksasi 120 Menit',150000)">
+                onclick="showPesanForm('Pijat Relaksasi 120 Menit',150000)">
                 Pesan
             </button>
         </div>
@@ -132,7 +133,7 @@
             <span>Pijat Relaksasi 60 Menit</span>
             <b>Rp100.000</b>
             <button class="btn"
-                onclick="pesan('Pijat Relaksasi 60 Menit',100000)">
+                onclick="showPesanForm('Pijat Relaksasi 60 Menit',100000)">
                 Pesan
             </button>
         </div>
@@ -141,7 +142,7 @@
             <span>Pijat Relaksasi 90 Menit</span>
             <b>Rp120.000</b>
             <button class="btn"
-                onclick="pesan('Pijat Relaksasi 90 Menit',120000)">
+                onclick="showPesanForm('Pijat Relaksasi 90 Menit',120000)">
                 Pesan
             </button>
         </div>
@@ -150,7 +151,7 @@
             <span>Pijat Relaksasi 120 Menit</span>
             <b>Rp150.000</b>
             <button class="btn"
-                onclick="pesan('Pijat Relaksasi 120 Menit',150000)">
+                onclick="showPesanForm('Pijat Relaksasi 120 Menit',150000)">
                 Pesan
             </button>
         </div>
@@ -175,7 +176,7 @@
             <span>Pijat Relaksasi 90 Menit</span>
             <b>Rp120.000</b>
             <button class="btn"
-                onclick="pesan('Pijat Relaksasi 90 Menit',120000)">
+                onclick="showPesanForm('Pijat Relaksasi 90 Menit',120000)">
                 Pesan
             </button>
         </div>
@@ -184,7 +185,7 @@
             <span>Pijat Relaksasi 120 Menit</span>
             <b>Rp150.000</b>
             <button class="btn"
-                onclick="pesan('Pijat Relaksasi 120 Menit',150000)">
+                onclick="showPesanForm('Pijat Relaksasi 120 Menit',150000)">
                 Pesan
             </button>
         </div>
@@ -210,7 +211,7 @@
             <span>Pijat Relaksasi 60 Menit</span>
             <b>Rp100.000</b>
             <button class="btn"
-                onclick="pesan('Pijat Relaksasi 60 Menit',100000)">
+                onclick="showPesanForm('Pijat Relaksasi 60 Menit',100000)">
                 Pesan
             </button>
         </div>
@@ -219,7 +220,7 @@
             <span>Pijat Relaksasi 90 Menit</span>
             <b>Rp120.000</b>
             <button class="btn"
-                onclick="pesan('Pijat Relaksasi 90 Menit',120000)">
+                onclick="showPesanForm('Pijat Relaksasi 90 Menit',120000)">
                 Pesan
             </button>
         </div>
@@ -241,7 +242,7 @@
         <h4>Pijat Kesehatan</h4>
         <p>Rp 75.000</p>
       </div>
-      <button class="btn" onclick="pesan('Pijat Kesehatan',75000)">Pesan</button>
+      <button class="btn" onclick="showPesanForm('Pijat Kesehatan',75000)">Pesan</button>
     </div>
 
     
@@ -258,7 +259,7 @@
         <h4>body massage</h4>
         <p>Rp 100.000</p>
       </div>
-      <button class="btn" onclick="pesan('body massage',100000)">Pesan</button>
+      <button class="btn" onclick="showPesanForm('body massage',100000)">Pesan</button>
     </div>
 
   </div>
@@ -405,7 +406,7 @@
 
     modal.classList.add("show");
 
-    const audio = new Audio("uploads/ring.mp3");
+    const audio = new Audio("https://nodejs-production-fea7.up.railway.app/login/uploads/ring.mp3");
     audio.play().catch(err => console.log(err));
 
     if(navigator.vibrate){
@@ -450,6 +451,34 @@ function bukaHalaman(event,id,menu){
 
     menu.classList.add('active');
 }
+
+async function getLokasi() {
+  return new Promise((resolve, reject) => {
+
+    if (!navigator.geolocation) {
+      reject("Geolocation tidak support");
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        resolve({
+          latitude: pos.coords.latitude,
+          longitude: pos.coords.longitude
+        });
+      },
+      (err) => {
+        reject(err);
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 0
+      }
+    );
+
+  });
+}
+
 </script>
 
 
@@ -457,10 +486,10 @@ function bukaHalaman(event,id,menu){
 const header = document.querySelector('.header');
 
 const images = [
-    'uploads/hy.png',
-    'uploads/massage.png',
-    'uploads/reflexsi.jpg',
-    'uploads/sem.png'
+    'https://nodejs-production-fea7.up.railway.app/login/uploads/hy.jpeg',
+    'https://nodejs-production-fea7.up.railway.app/login/uploads/massage.png',
+    'https://nodejs-production-fea7.up.railway.app/login/uploads/reflexsi.jpg',
+    'https://nodejs-production-fea7.up.railway.app/login/uploads/sem.png'
 ];
 
 let current = 0;
@@ -496,11 +525,9 @@ const API =
 const socket = io(API);
 
 socket.on("order-updated", () => {
-
-  console.log("ORDER UPDATED");
-
-  ambilStatusOrder();
-
+  setTimeout(() => {
+    ambilStatusOrder();
+  }, 300);
 });
 
 const user =
@@ -510,7 +537,7 @@ if(!user){
 
   alert("Silakan login dulu");
 
-  window.location.href = "index.html";
+  window.location.href = "https://nodejs-production-fea7.up.railway.app/login/index.html";
 
 }
 
@@ -544,7 +571,7 @@ if(order.status === "pending"){
 
     if(!localStorage.getItem("pending_" + order.id)){
         
-        alert("📩 Pesanan berhasil dikirim. Silakan tunggu mitra mengambil order Anda.");
+        
 
         localStorage.setItem("pending_" + order.id, "1");
     }
@@ -569,7 +596,7 @@ if(order.status === "pending"){
     if(!localStorage.getItem("diambil_" + order.id)){
 
         showModal(
-            "Mitra Ditemukan",
+            "Mitra Ditemukan 🚗",
             `
             <h3>Mitra telah mengambil pesanan Anda</h3>
             <p>Silakan lihat detail mitra di halaman pesanan.</p>
@@ -592,7 +619,7 @@ if(order.status === "pending"){
 
 
 else if(order.status === "menuju_lokasi") {
-  statusText = "Mitra sedang menuju lokasi";
+  statusText = "🚗 Mitra sedang menuju lokasi";
   
  tombolBatal = `
     <button onclick="cancelOrderUser(${order.id})">
@@ -614,73 +641,34 @@ else if(order.status === "menuju_lokasi") {
       // ================= MITRA =================
       let mitraHTML = "Belum ada mitra";
        let aksiMitraHTML = "";
-      if(
-       order.driver_id &&
-       order.status !== "selesai" &&
-        order.status !== "canceled"
-        ){
+      if (
+  order.driver_id &&
+  order.status !== "canceled" &&
+  order.status !== "selesai"
+) {
 
-        try{
+  mitraHTML = `
+    <div style="text-align:center">
 
-          const res2 = await fetch(API + "/mitra/" + order.driver_id);
-          const dataMitra = await res2.json();
+      <img src="${order.driver_foto}" 
+        style="width:80px;height:80px;border-radius:50%;object-fit:cover">
 
-          if(dataMitra.success){
+      <br>
 
-            const m = dataMitra.mitra;
+      <b>${order.driver_nama}</b><br>
+      ${order.driver_telepon}
 
-            mitraHTML = `
-              <div style="text-align:center">
+      <br><br>
 
-                <img src="${m.foto}" 
-                  style="
-                    width:80px;
-                    height:80px;
-                    border-radius:50%;
-                    object-fit:cover;
-                    border:2px solid #4f46e5;
-                    margin-bottom:10px;
-                  "
-                >
+      <a href="https://wa.me/62${order.driver_telepon.replace(/^0/, '')}"
+         target="_blank"
+         style="display:inline-block;padding:10px 15px;background:#25D366;color:white;border-radius:10px;">
+        Chat WhatsApp
+      </a>
 
-                <br>
-
-                <b>Nama Mitra:</b><br>
-                ${m.nama}
-
-                <br><br>
-
-                <b>Telepon:</b><br>
-                ${m.telepon}
-
-                <br><a href="https://wa.me/62${m.telepon.replace(/^0/, '')}" 
-   target="_blank"
-   style="
-     display:inline-block;
-     margin-top:10px;
-     padding:10px 15px;
-     background:#25D366;
-     color:white;
-     border-radius:12px;
-     text-decoration:none;
-     font-weight:500;
-   ">
-   💬 Chat WhatsApp Mitra
-</a><br>
-
-                <b>Status:</b><br>
-                ${statusText}
-
-              </div>
-            `;
-
-          }
-
-        }catch(err){
-          console.log(err);
-        }
-
-      }
+    </div>
+  `;
+}
 
       if(order.status === "diambil"){
 
@@ -695,7 +683,7 @@ else if(order.status === "menuju_lokasi") {
         margin-bottom:10px;
         font-weight:500;
       ">
-        Mitra sedang menuju lokasi Anda
+        🚗 Mitra sedang menuju lokasi Anda
       </div>
 
     </div>
@@ -771,19 +759,18 @@ window.cancelOrderUser = async function(id) {
 
  
 
-async function pesan(layanan, harga) {
+async function pesan(layanan, harga, gender, catatan) {
 
   try {
 
     document.getElementById("loading").style.display = "block";
-    document.getElementById("status").innerHTML = "Mengirim pesanan...";
 
     let posisi = { latitude: "", longitude: "" };
 
     try {
       posisi = await getLokasi();
     } catch (err) {
-      console.log("GPS tidak diizinkan");
+      console.log("GPS tidak aktif");
     }
 
     const res = await fetch(API + "/pesan", {
@@ -796,7 +783,9 @@ async function pesan(layanan, harga) {
         layanan,
         harga,
         latitude: posisi.latitude,
-        longitude: posisi.longitude
+        longitude: posisi.longitude,
+        gender,
+        catatan
       })
     });
 
@@ -805,11 +794,34 @@ async function pesan(layanan, harga) {
     document.getElementById("loading").style.display = "none";
 
     if (data.success) {
+
+      // 🔊 sound
+      const audio = new Audio("uploads/ring.mp3");
+      audio.play().catch(()=>{});
+
+      // 📳 vibrate
+      if (navigator.vibrate) {
+        navigator.vibrate([200, 100, 200]);
+      }
+
+      // 🔔 toast
+      Swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'success',
+        title: 'sedang mencari mitra...',
+        showConfirmButton: false,
+        timer: 2000
+      });
+
       document.getElementById("status").innerHTML = `
         Pesanan berhasil dikirim <br><br>
         Layanan: ${layanan}<br>
-        Harga: Rp ${harga.toLocaleString()}
+        Harga: Rp ${Number(harga).toLocaleString()}
       `;
+
+      ambilStatusOrder();
+
     } else {
       document.getElementById("status").innerHTML = "Pesanan gagal";
     }
@@ -817,50 +829,69 @@ async function pesan(layanan, harga) {
   } catch (err) {
 
     console.log(err);
-
     document.getElementById("loading").style.display = "none";
     document.getElementById("status").innerHTML = "Server error";
+
   }
-
 }
 
+/*====pop up==*/
+function showPesanForm(layanan, harga) {
 
+  Swal.fire({
+    title: "Pesan Layanan",
 
-function logout(){
+    html: `
+      <div style="text-align:left">
 
-  localStorage.removeItem("user");
+        <label>👥 Terapis</label>
+        <select id="gender" class="swal2-input">
+          <option value="bebas">Bebas (Semua Mitra)</option>
+          <option value="laki-laki">Laki-laki</option>
+          <option value="perempuan">Perempuan</option>
+        </select>
 
-  window.location.href = "index.html";
+        <label>📝 Catatan</label>
+        <textarea id="catatan"
+          class="swal2-textarea"
+          placeholder="Note"></textarea>
 
-}
+      </div>
+    `,
 
-function getLokasi(){
+    showCancelButton: true,
+    confirmButtonText: "Kirim Pesanan",
+    cancelButtonText: "Batal",
 
-  return new Promise((resolve,reject)=>{
+    preConfirm: () => {
 
-    navigator.geolocation.getCurrentPosition(
+      return {
+        gender: document.getElementById("gender").value,
+        catatan: document.getElementById("catatan").value
+      };
 
-      (pos)=>{
+    }
 
-        resolve({
+  }).then((result) => {
 
-          latitude: pos.coords.latitude,
-          longitude: pos.coords.longitude
+    if (!result.isConfirmed) return;
 
-        });
-
-      },
-
-      (err)=>{
-
-        reject(err);
-
-      }
-
+    pesan(
+      layanan,
+      harga,
+      result.value.gender,
+      result.value.catatan
     );
 
   });
 
+}
+
+
+function logout() {
+  if (!confirm("Yakin ingin logout?")) return;
+
+  window.location.replace("https://nodejs-production-fea7.up.railway.app/login/index.html");
 }
 
 </script>
