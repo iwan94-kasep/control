@@ -406,7 +406,7 @@
 
     modal.classList.add("show");
 
-    const audio = new Audio("https://nodejs-production-fea7.up.railway.app/login/uploads/ring.mp3");
+    const audio = new Audio("uploads/ring.mp3");
     audio.play().catch(err => console.log(err));
 
     if(navigator.vibrate){
@@ -486,10 +486,10 @@ async function getLokasi() {
 const header = document.querySelector('.header');
 
 const images = [
-    'https://nodejs-production-fea7.up.railway.app/login/uploads/hy.jpeg',
-    'https://nodejs-production-fea7.up.railway.app/login/uploads/massage.png',
-    'https://nodejs-production-fea7.up.railway.app/login/uploads/reflexsi.jpg',
-    'https://nodejs-production-fea7.up.railway.app/login/uploads/sem.png'
+    'uploads/hy.jpeg',
+    'uploads/massage.png',
+    'uploads/reflexsi.jpg',
+    'uploads/sem.png'
 ];
 
 let current = 0;
@@ -537,7 +537,7 @@ if(!user){
 
   alert("Silakan login dulu");
 
-  window.location.href = "https://nodejs-production-fea7.up.railway.app/login/index.html";
+  window.location.href = "index.html";
 
 }
 
@@ -891,7 +891,7 @@ function showPesanForm(layanan, harga) {
 function logout() {
   if (!confirm("Yakin ingin logout?")) return;
 
-  window.location.replace("https://nodejs-production-fea7.up.railway.app/login/index.html");
+  window.location.replace("index.html");
 }
 
 </script>
