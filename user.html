@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Customer Dashboard</title>
+<style>
+  #starContainer span {
+    cursor: pointer;
+  }
+</style>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -486,7 +491,7 @@ async function getLokasi() {
 const header = document.querySelector('.header');
 
 const images = [
-    'uploads/hy.jpeg',
+    'uploads/hy.png',
     'uploads/massage.png',
     'uploads/reflexsi.jpg',
     'uploads/sem.png'
@@ -524,9 +529,16 @@ const API =
 
 const socket = io(API);
 
+let loadingStatus = false;
+
 socket.on("order-updated", () => {
-  setTimeout(() => {
-    ambilStatusOrder();
+  if (loadingStatus) return;
+
+  loadingStatus = true;
+
+  setTimeout(async () => {
+    await ambilStatusOrder();
+    loadingStatus = false;
   }, 300);
 });
 
@@ -632,8 +644,12 @@ else if(order.status === "menuju_lokasi") {
         statusText = "💆 Sedang Dipijat";
       }
       else if(order.status === "selesai"){
-        statusText = "✅ Order Selesai";
-      }
+
+  statusText = "✅ Order Selesai";
+
+  cekRating(order);
+
+}
       else if(order.status === "canceled"){
         statusText = "❌ Order Dibatalkan";
       }
@@ -845,11 +861,11 @@ function showPesanForm(layanan, harga) {
       <div style="text-align:left">
 
         <label>👥 Terapis</label>
-        <select id="gender" class="swal2-input">
-          <option value="bebas">Bebas (Semua Mitra)</option>
-          <option value="laki-laki">Laki-laki</option>
-          <option value="perempuan">Perempuan</option>
-        </select>
+       <select id="gender" class="swal2-input">
+  <option value="bebas">Bebas (Semua Mitra)</option>
+  <option value="laki">Laki-laki</option>
+  <option value="perempuan">Perempuan</option>
+</select>
 
         <label>📝 Catatan</label>
         <textarea id="catatan"
@@ -884,6 +900,144 @@ function showPesanForm(layanan, harga) {
     );
 
   });
+
+}
+/*==cek ratting==*/
+async function cekRating(order){
+
+  try{
+
+    const res = await fetch(
+      API + "/cek-rating/" + order.id
+    );
+
+    const data = await res.json();
+
+    if(data.rated){
+      return;
+    }
+
+    tampilkanPopupRating(order);
+
+  }catch(err){
+
+    console.log(err);
+
+  }
+
+}
+
+
+function tampilkanPopupRating(order){
+
+  Swal.fire({
+    title: "Beri Rating Mitra",
+
+    html: `
+      <div id="starContainer" style="font-size:35px; cursor:pointer;">
+        <span data-value="1">⭐</span>
+        <span data-value="2">⭐</span>
+        <span data-value="3">⭐</span>
+        <span data-value="4">⭐</span>
+        <span data-value="5">⭐</span>
+      </div>
+
+      <input id="ratingValue" type="hidden" value="5">
+
+      <textarea id="ulasan"
+        class="swal2-textarea"
+        placeholder="Tulis ulasan"></textarea>
+    `,
+
+    didOpen: () => {
+      const stars = Swal.getPopup().querySelectorAll("#starContainer span");
+      const input = Swal.getPopup().querySelector("#ratingValue");
+
+      stars.forEach(star => {
+        star.addEventListener("click", () => {
+          const value = star.getAttribute("data-value");
+          input.value = value;
+
+          // efek visual (highlight bintang)
+          stars.forEach(s => {
+            s.style.opacity = s.getAttribute("data-value") <= value ? "1" : "0.3";
+          });
+        });
+      });
+    },
+
+    confirmButtonText: "Kirim",
+
+    preConfirm: () => {
+      return {
+        rating: document.getElementById("ratingValue").value,
+        ulasan: document.getElementById("ulasan").value
+      };
+    }
+
+  }).then(async(result) => {
+
+    if(!result.isConfirmed) return;
+
+    await kirimRating(
+      order,
+      result.value.rating,
+      result.value.ulasan
+    );
+
+  });
+}
+
+window.pilihBintang = function(nilai){
+
+  document.getElementById(
+    "ratingValue"
+  ).value = nilai;
+
+}
+
+async function kirimRating(
+  order,
+  rating,
+  ulasan
+){
+
+  try{
+
+    const res = await fetch(
+      API + "/rating-mitra",
+      {
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+          order_id: order.id,
+          user_id: order.user_id,
+          driver_id: order.driver_id,
+          rating,
+          ulasan
+        })
+      }
+    );
+
+    const data = await res.json();
+
+    if(data.success){
+
+      Swal.fire(
+        "Terima Kasih",
+        "Rating berhasil dikirim",
+        "success"
+      );
+
+    }
+
+  }catch(err){
+
+    console.log(err);
+
+  }
 
 }
 
